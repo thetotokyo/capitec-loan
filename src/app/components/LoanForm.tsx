@@ -12,8 +12,11 @@ export default function BankApplicationForm() {
     });
 
     const [errorMsg, setErrorMsg] = useState<String>('');
+    const [successMsg, setSuccessMsg] = useState<String>('');
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setErrorMsg("");
+
         setFormData(form => ({
             ...form,
             [e.target.name]: e.target.value,
@@ -22,8 +25,17 @@ export default function BankApplicationForm() {
 
     const handleSubmit = (e: ChangeEvent) => {
         e.preventDefault();
+        
+        setErrorMsg("")
 
         if (formData.income > 0 && formData.expenses > 0 && formData.desired > 0) {
+
+            if(formData.income > formData.expenses){
+                setSuccessMsg("You qualify for a loan of R"+formData.desired);
+            }
+            else {
+                setErrorMsg("Unfortunately you do not qualify for a loan");
+            }
 
             console.log("FormData:", formData);
 
@@ -64,7 +76,8 @@ export default function BankApplicationForm() {
                             required
                             onChange={handleChange}
                             className="w-full border border-gray-300 rounded-lg p-3 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                            placeholder="0"
+                            step={0.01}
+                            placeholder="0.00"
                         />
                     </div>
                 </div>
@@ -84,7 +97,8 @@ export default function BankApplicationForm() {
                             required
                             onChange={handleChange}
                             className="w-full border border-gray-300 rounded-lg p-3 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                            placeholder="0"
+                            step={0.01}
+                            placeholder="0.00"
                         />
                     </div>
                 </div>
@@ -103,12 +117,17 @@ export default function BankApplicationForm() {
                             required
                             onChange={handleChange}
                             className="w-full border border-gray-300 rounded-lg p-3 pl-8 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                            placeholder="0"
+                            step={0.01}
+                            placeholder="0.00"
                         />
                     </div>
                 </div>
+                
+                {/* On fail */}
+                {errorMsg && <p className="text-red-800 text-center">{errorMsg}</p>}
 
-                <p className="text-red-800 text-center">{errorMsg}</p>
+                {/* On Success */}
+                {successMsg && <p className="text-green-800 text-center">{successMsg}</p>}
 
                 <button
                     type="submit"
