@@ -4,3 +4,9 @@ export type FormData = {
     expenses: number;
     desired: number;
 };
+
+export type ModalProps = {
+  title: string;
+  subtitle: string;
+  color: string;
+};

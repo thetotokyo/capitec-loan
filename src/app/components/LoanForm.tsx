@@ -3,6 +3,7 @@
 import { useState, ChangeEvent } from "react";
 import Image from "next/image";
 import { FormData } from "../types";
+import Modal from "./Modal";
 
 export default function BankApplicationForm() {
     const [formData, setFormData] = useState<FormData>({
@@ -11,8 +12,8 @@ export default function BankApplicationForm() {
         desired: 0
     });
 
-    const [errorMsg, setErrorMsg] = useState<String>('');
-    const [successMsg, setSuccessMsg] = useState<String>('');
+    const [errorMsg, setErrorMsg] = useState<string>('');
+    const [successMsg, setSuccessMsg] = useState<string>('');
 
     const isQualified = (income: number, expenses: number, desired: number) => {
         let qualified = false
@@ -144,12 +145,7 @@ export default function BankApplicationForm() {
                     </div>
                 </div>
                 
-                {/* On fail */}
-                {errorMsg && <p className="text-red-800 text-center">{errorMsg}</p>}
-
-                {/* On Success */}
-                {successMsg && <p className="text-green-800 text-center">{successMsg}</p>}
-
+                
                 <button
                     type="submit"
                     className="w-full bg-blue-700 hover:bg-blue-800 text-white py-3 rounded-xl font-semibold transition duration-300 shadow-md"
@@ -157,6 +153,14 @@ export default function BankApplicationForm() {
                     Calculate
                 </button>
             </form>
+
+
+            {/* On fail */}
+            {errorMsg && <Modal title={"Not Qualified"} subtitle={errorMsg} color={"text-red-600"} />}
+
+            {/* On Success */}
+            {successMsg && <Modal title={"Qualified"} subtitle={successMsg} color={"text-green-600"} />}
+
         </div>
     );
 }
