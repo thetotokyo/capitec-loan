@@ -2,7 +2,7 @@
 
 import { useState, ChangeEvent } from "react";
 import Image from "next/image";
-import { FormData } from "../types";
+import { createPost, FormData } from "../types";
 import Modal from "./Modal";
 
 export default function BankApplicationForm() {
@@ -51,6 +51,9 @@ export default function BankApplicationForm() {
 
             if (isQualified(income, expenses, desired)) {
 
+                //Make API call
+                // createPost('/api/loan/success', formData)
+                
                 e.target.reset()
 
                 setSuccessMsg("Congratulations! You qualify for a loan amount of R" + desired.toFixed(2));
