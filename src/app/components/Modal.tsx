@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { ModalProps } from '../types'
 
-export default function Modal({title, subtitle, color = 'text-green-600'}: ModalProps) {
+export default function Modal({title, subtitle, onClose, color = 'text-green-600'}: ModalProps) {
 
   return (
     <div className="h-screen bg-gray-500/60 p-5 left-0 bottom-0 fixed z-20 flex flex-col align-center justify-center">
@@ -14,6 +14,7 @@ export default function Modal({title, subtitle, color = 'text-green-600'}: Modal
             </p>
 
             <button
+                onClick={onClose}
                 type="button"
                 className="w-full bg-red-700 hover:bg-red-800 text-white py-3 rounded-xl font-semibold transition duration-300 shadow-md"
             >

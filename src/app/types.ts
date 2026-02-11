@@ -8,5 +8,6 @@ export type FormData = {
 export type ModalProps = {
   title: string;
   subtitle: string;
+  onClose: () => void
   color: string;
 };

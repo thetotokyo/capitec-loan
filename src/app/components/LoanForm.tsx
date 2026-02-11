@@ -17,11 +17,11 @@ export default function BankApplicationForm() {
 
     const isQualified = (income: number, expenses: number, desired: number) => {
         let qualified = false
-        if(income > expenses){  // No money to spare
-            
-            const installment = desired/6 // Repayments for 6 months loan
+        if (income > expenses) {  // No money to spare
 
-            if(installment <= (income*0.3)){ // 30% rule to check affordability
+            const installment = desired / 6 // Repayments for 6 months loan
+
+            if (installment <= (income * 0.3)) { // 30% rule to check affordability
                 qualified = true
             }
         }
@@ -30,8 +30,7 @@ export default function BankApplicationForm() {
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setErrorMsg("");
-        setSuccessMsg("")
+        closeModal()
 
         setFormData(form => ({
             ...form,
@@ -41,9 +40,8 @@ export default function BankApplicationForm() {
 
     const handleSubmit = (e: ChangeEvent) => {
         e.preventDefault();
-        
-        setErrorMsg("")
-        setSuccessMsg("")
+
+        closeModal()
 
         const income = Number(formData.income);
         const expenses = Number(formData.expenses);
@@ -51,12 +49,12 @@ export default function BankApplicationForm() {
 
         if (income > 0 && expenses > 0 && desired > 0) {
 
-            if(isQualified(income, expenses, desired)){
-
-                setSuccessMsg("Congratulations! You qualify for a loan amount of R"+desired.toFixed(2));
+            if (isQualified(income, expenses, desired)) {
+                
+                setSuccessMsg("Congratulations! You qualify for a loan amount of R" + desired.toFixed(2));
             }
             else {
-                setErrorMsg("Unfortunately you do not qualify for a loan amount of R"+desired.toFixed(2)+'. You can try again with a lower amount.');
+                setErrorMsg("Unfortunately you do not qualify for a loan amount of R" + desired.toFixed(2) + '. You can try again with a lower amount.');
             }
 
             console.log("FormData:", formData);
@@ -67,6 +65,10 @@ export default function BankApplicationForm() {
         }
     };
 
+    const closeModal = () => {
+        setErrorMsg("")
+        setSuccessMsg("")
+    }
 
     return (
         <div className="w-full max-w-3xl">
@@ -144,8 +146,8 @@ export default function BankApplicationForm() {
                         />
                     </div>
                 </div>
-                
-                
+
+
                 <button
                     type="submit"
                     className="w-full bg-blue-700 hover:bg-blue-800 text-white py-3 rounded-xl font-semibold transition duration-300 shadow-md"
@@ -156,10 +158,24 @@ export default function BankApplicationForm() {
 
 
             {/* On fail */}
-            {errorMsg && <Modal title={"Not Qualified"} subtitle={errorMsg} color={"text-red-600"} />}
+            {errorMsg &&
+                <Modal
+                    title={"Not Qualified"}
+                    subtitle={errorMsg}
+                    onClose={closeModal}
+                    color={"text-red-600"}
+                />
+            }
 
             {/* On Success */}
-            {successMsg && <Modal title={"Qualified"} subtitle={successMsg} color={"text-green-600"} />}
+            {successMsg &&
+                <Modal
+                    title={"Qualified"}
+                    subtitle={successMsg}
+                    onClose={closeModal}
+                    color={"text-green-600"}
+                />
+            }
 
         </div>
     );
