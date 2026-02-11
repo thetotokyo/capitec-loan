@@ -38,7 +38,7 @@ export default function BankApplicationForm() {
         }));
     };
 
-    const handleSubmit = (e: ChangeEvent) => {
+    const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         closeModal()
@@ -50,7 +50,9 @@ export default function BankApplicationForm() {
         if (income > 0 && expenses > 0 && desired > 0) {
 
             if (isQualified(income, expenses, desired)) {
-                
+
+                e.target.reset()
+
                 setSuccessMsg("Congratulations! You qualify for a loan amount of R" + desired.toFixed(2));
             }
             else {
