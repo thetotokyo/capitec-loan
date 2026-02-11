@@ -14,8 +14,23 @@ export default function BankApplicationForm() {
     const [errorMsg, setErrorMsg] = useState<String>('');
     const [successMsg, setSuccessMsg] = useState<String>('');
 
+    const isQualified = (income: number, expenses: number, desired: number) => {
+        let qualified = false
+        if(income > expenses){  // No money to spare
+            
+            const installment = desired/6 // Repayments for 6 months loan
+
+            if(installment <= (income*0.3)){ // 30% rule to check affordability
+                qualified = true
+            }
+        }
+
+        return qualified
+    }
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setErrorMsg("");
+        setSuccessMsg("")
 
         setFormData(form => ({
             ...form,
@@ -27,14 +42,20 @@ export default function BankApplicationForm() {
         e.preventDefault();
         
         setErrorMsg("")
+        setSuccessMsg("")
 
-        if (formData.income > 0 && formData.expenses > 0 && formData.desired > 0) {
+        const income = Number(formData.income);
+        const expenses = Number(formData.expenses);
+        const desired = Number(formData.desired);
 
-            if(formData.income > formData.expenses){
-                setSuccessMsg("You qualify for a loan of R"+formData.desired);
+        if (income > 0 && expenses > 0 && desired > 0) {
+
+            if(isQualified(income, expenses, desired)){
+
+                setSuccessMsg("Congratulations! You qualify for a loan amount of R"+desired.toFixed(2));
             }
             else {
-                setErrorMsg("Unfortunately you do not qualify for a loan");
+                setErrorMsg("Unfortunately you do not qualify for a loan amount of R"+desired.toFixed(2)+'. You can try again with a lower amount.');
             }
 
             console.log("FormData:", formData);
