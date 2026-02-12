@@ -1,6 +1,6 @@
-Capitec Loan is a React NextJS 16 project simulating a bank loan eligibility.
+Capitec Loan is a React NextJS 16 project simulating a bank loan eligibility calculator.
 
-![App Screenshot](https://github.com/thetotokyo/capitec-loan/blob/main/public/screenshot.png)
+![Screenshot](https://github.com/thetotokyo/capitec-loan/blob/main/public/screenshot.png)
 
 ## Getting Started
 

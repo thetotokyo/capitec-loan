@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { ModalProps } from '../types'
 
 export default function Modal({title, subtitle, onClose, color = 'text-green-600'}: ModalProps) {
