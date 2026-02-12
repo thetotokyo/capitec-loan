@@ -1,4 +1,6 @@
-This is a React NextJS 16 project - Capitec Loan APP
+Capitec Loan is a React NextJS 16 project simulating a bank loan eligibility.
+
+![App Screenshot](https://github.com/thetotokyo/capitec-loan/blob/main/public/screenshot.png)
 
 ## Getting Started
 
@@ -7,7 +9,6 @@ First, run the following command to make sure all depedencies are installed:
 ```bash
 npm install
 ```
-
 
 ## Run Project
 
