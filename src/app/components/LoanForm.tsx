@@ -62,8 +62,6 @@ export default function BankApplicationForm() {
                 setErrorMsg("Unfortunately you do not qualify for a loan amount of R" + desired.toFixed(2) + '. You can try again with a lower amount.');
             }
 
-            console.log("FormData:", formData);
-
         }
         else {
             setErrorMsg("Please complete all fields.");

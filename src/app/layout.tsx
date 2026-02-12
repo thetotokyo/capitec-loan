@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Capitec Loan",
-  description: "Your form to help you determine loan amount you may qualify for.",
+  description: "Bank loan eligibility simulator.",
 };
 
 export default function RootLayout({
